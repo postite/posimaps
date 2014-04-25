@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+	
+	<meta title="PostiteMAps" package="com.postite.Maps" version="1.0.0" company="postite.inc" />
+	<app path="Export" file="postitemaps" main="Example08" />
+	
+	<window width="800" height="600" if="desktop" />
+	<window width="0" height="0" if="html5" />
+	
+	<source path="haxemaps" />
+	<!-- <set name="html5-backend" value="openfl-bitfive" /> -->
+	<haxelib name="openfl" />
+	<haxelib name="msignal" />
+	<haxedef name="network-sandbox"/>
+	
+	<haxeflag name="-dce full" />
+	<!-- <haxeflag name="--no-traces" /> -->
+	<!-- <set name="html5-backend" value="openfl-bitfive" /> -->
+	 <!-- <haxedef name="dom" /> -->
+	 <haxedef name="source-map-content" />
+	<ios binaries="armv7" />
+	
+	<!-- <assets path="Assets/fonts" rename="fonts" include="*.ttf" />
+	<assets path="Assets/images" rename="images" include="*" exclude="icon.svg" /> -->
+	
+	
+	
+	
+	
+</project>
