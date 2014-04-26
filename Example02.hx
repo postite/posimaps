@@ -56,8 +56,8 @@ class Example02 extends Sprite {
     {
         super();
    
-        toolbar = new ToolBar();
-        toolbar.move(0, 0);
+        // toolbar = new ToolBar();
+        // toolbar.move(0, 0);
         canvas = new Canvas();
         canvas.move(0, 0);
 
@@ -67,20 +67,20 @@ class Example02 extends Sprite {
         canvas.setCenter(new LngLat(16.124, 49.124));
         canvas.addLayer(new TileLayer(new OpenStreetMapService(), 8, #if TILE_OPT false #else true #end));
         canvas.initialize();
-        canvas.addEventListener(MapEvent.MAP_MOUSEMOVE, mouseMove);
+        //canvas.addEventListener(MapEvent.MAP_MOUSEMOVE, mouseMove);
 
-        initToolbar();
+        //initToolbar();
 
         addChild(canvas);
-        addChild(toolbar);
+        //addChild(toolbar);
     }
 
     public function stageResized(e:Event)
     {
-        toolbar.setSize(flash.Lib.current.stage.stageWidth, 30);
+       // toolbar.setSize(flash.Lib.current.stage.stageWidth, 30);
         canvas.setSize(flash.Lib.current.stage.stageWidth, flash.Lib.current.stage.stageHeight);
     }
-
+/*
     function initToolbar()
     {
         var me = this;
@@ -108,31 +108,31 @@ class Example02 extends Sprite {
         toolbar.addButton(new ZoomInButton(), "Zoom In",  function(b:CustomButton) { me.canvas.zoomIn(); });
         toolbar.addSeparator(30);
         //pan buttons
-        toolbar.addButton(new UpButton(), "Move up",  function(b:CustomButton) { me.pan(1); });
-        toolbar.addButton(new DownButton(), "Move down",  function(b:CustomButton) { me.pan(2); });
-        toolbar.addButton(new LeftButton(), "Move left",  function(b:CustomButton) { me.pan(4); });
-        toolbar.addButton(new RightButton(), "Move right",  function(b:CustomButton) { me.pan(8); });
+        // toolbar.addButton(new UpButton(), "Move up",  function(b:CustomButton) { me.pan(1); });
+        // toolbar.addButton(new DownButton(), "Move down",  function(b:CustomButton) { me.pan(2); });
+        // toolbar.addButton(new LeftButton(), "Move left",  function(b:CustomButton) { me.pan(4); });
+        // toolbar.addButton(new RightButton(), "Move right",  function(b:CustomButton) { me.pan(8); });
     }
+*/
+    // function pan(direction:Int)
+    // {
+    //    var lt:LngLat = canvas.getLeftTopCorner();
+    //    var br:LngLat = canvas.getRightBottomCorner();
+    //    var p:LngLat  = canvas.getCenter();
 
-    function pan(direction:Int)
-    {
-       var lt:LngLat = canvas.getLeftTopCorner();
-       var br:LngLat = canvas.getRightBottomCorner();
-       var p:LngLat  = canvas.getCenter();
+    //    if (direction & 0x3 == 1) p.lat = lt.lat; //up
+    //    if (direction & 0x3 == 2) p.lat = br.lat; //down
+    //    if (direction & 0xC == 4) p.lng = lt.lng; //left
+    //    if (direction & 0xC == 8) p.lng = br.lng; //right
 
-       if (direction & 0x3 == 1) p.lat = lt.lat; //up
-       if (direction & 0x3 == 2) p.lat = br.lat; //down
-       if (direction & 0xC == 4) p.lng = lt.lng; //left
-       if (direction & 0xC == 8) p.lng = br.lng; //right
+    //    canvas.panTo(p);
+    // }
 
-       canvas.panTo(p);
-    }
-
-    function mouseMove(e:map.MapEvent)
-    {
-       toolbar.setText("longitude:" + LngLat.fmtCoordinate(e.point.lng) + 
-                       " latitude:" + LngLat.fmtCoordinate(e.point.lat) + 
-                       " zoom:" + canvas.getZoom());
-    }
+    // function mouseMove(e:map.MapEvent)
+    // {
+    //    toolbar.setText("longitude:" + LngLat.fmtCoordinate(e.point.lng) + 
+    //                    " latitude:" + LngLat.fmtCoordinate(e.point.lat) + 
+    //                    " zoom:" + canvas.getZoom());
+    // }
 
 }
