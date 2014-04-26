@@ -12,12 +12,14 @@
 	<haxelib name="openfl" />
 	<haxelib name="msignal" />
 	<haxedef name="network-sandbox"/>
-	
+<!-- <template path="templates" /> -->
 	<haxeflag name="-dce full" />
+	<!-- <haxeflag name="-cmd haxe t/api.hxml" /> -->
 	<!-- <haxeflag name="--no-traces" /> -->
 	<!-- <set name="html5-backend" value="openfl-bitfive" /> -->
 	 <!-- <haxedef name="dom" /> -->
-	 <haxedef name="source-map-content" />
+	<!--  <haxedef name="source-map-content" /> -->
+	 <!-- <haxedef name="TILE_EVT_DBG" /> -->
 	<ios binaries="armv7" />
 	
 	<!-- <assets path="Assets/fonts" rename="fonts" include="*.ttf" />
