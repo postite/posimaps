@@ -75,7 +75,7 @@ class Tile extends Sprite
         t.mouseEnabled = false;
         addChild(t);
         #end
-         
+        
         this.tidx = tidx;
         this.rtidx = -1; 
         this.ltidx = -1;
@@ -108,13 +108,15 @@ class Tile extends Sprite
         if (image != null)
         {
            this.image = image;
-           addChildAt(this.image, 0);
+           addChildAt(image,0);
+           
         }
         else 
         {
             
             var halfsize=size/2;
            graphics.lineStyle(2, 0xF0F0F0);
+           
            try
            graphics.drawCircle(halfsize,halfsize, 10)
            catch(msg:Dynamic)trace( msg);
@@ -134,7 +136,7 @@ class Tile extends Sprite
     {
     }
 
-    public function invalidate()
+     public function _invalidate()
     {
         this.valid = false;
     }
