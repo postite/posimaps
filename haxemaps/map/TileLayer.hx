@@ -76,12 +76,12 @@ class TileLayer extends Layer
         {
             var t:Tile = new Tile(this.tiles.length, this.tilesize);
             this.tiles.push(t);
-            addChild(t);
+            addChildAt(t,0);
         }
         initTile();
 
         this.loader = new TileLoader();
-        trace(" TileLoader");
+        
 	this.loader.addEventListener(TileLoadedEvent.TILE_LOADED, tileLoaded);
     }
 
@@ -508,7 +508,7 @@ class TileLayer extends Layer
 
     function tileLoaded(e:TileLoadedEvent)
     {
-      //trace(" tileLoaded");
+      
         if ((e.tidx >= 0) && (e.tidx < tiles.length)) 
         {
 
@@ -529,7 +529,7 @@ class TileLayer extends Layer
                t.assignImage(e.data);
             }
        }
-       //trace(" endTileLoaded");
+       
     }
 
 
