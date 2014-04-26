@@ -49,11 +49,11 @@ import TTimer ;
 
 //#end
 
-typedef Timer=TTimer
+
 #if TILE_EVT_DBG
 import flash.external.ExternalInterface;
 #end
-
+typedef Timer=TTimer
 typedef TileIDT = {
    var x : Int;
    var y : Int;
@@ -109,25 +109,44 @@ class ImageLoader extends Loader
    public function loadImage(tid:TileIDT, url:String) {
       var urlRequest:URLRequest = new URLRequest(url);
       this.tid = tid;
+     
       try {
-
+        
         #if TILE_EVT_DBG
         try {
             ExternalInterface.call("debugMessage", "loadImage "+id+" ("+tid.x+","+tid.y+","+tid.z+") prio:"+tid.priority);
         } catch (unknown : Dynamic)  { };
         #end
 
-        this.load(urlRequest,  new LoaderContext(true));
+        //this.load(urlRequest,  new LoaderContext(true));
+        // this.contentLoaderInfo.addEventListener(Event.OPEN,onLoad);
+        // this.contentLoaderInfo.addEventListener(Event.COMPLETE,onLoad);
+        // this.contentLoaderInfo.addEventListener(Event.COMPLETE, onLoad);
+        //     this.contentLoaderInfo.addEventListener(flash.events.HTTPStatusEvent.HTTP_STATUS, onLoad);
+        //     this.contentLoaderInfo.addEventListener(Event.INIT, onLoad);
+        //     this.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, onLoad);
+        //     this.contentLoaderInfo.addEventListener(Event.OPEN, onLoad);
+        //     this.contentLoaderInfo.addEventListener(flash.events.ProgressEvent.PROGRESS, onLoad);
+        //     this.contentLoaderInfo.addEventListener(Event.UNLOAD, onLoad);
+            this.load(urlRequest #if !html,  new LoaderContext(true) #end);
+            //this.load(urlRequest);
+        //this.loaderInfo.addEventListener(flash.events.ErrorEvent.IO_ERROR,onLoad);
+        // this.loaderInfo.addEventListener(Event.OPEN,onLoad)
+        // this.loaderInfo.addEventListener(Event.OPEN,onLoad)
         this.used = true;
         this.ttl = TIMEOUT;
 
       } 
       catch (unknown : Dynamic)  
       {
+        trace ( "used" +unknown);
         this.used = false;
       }
    }
- 
+  function onLoad(e:Event):Void
+  {
+    trace("onLoad"+ e.type);
+  }
    override public function toString() 
    {
       return "[ImageLoader id:" + id + "]";
@@ -250,11 +269,13 @@ class TileLoader extends EventDispatcher
 
     public function addRequest(x:Int, y:Int, z:Int, tidx:Int, priority:Int = 0)
     {
+      
        if ((x < 0) || (y < 0) || (z < 0)) return; 
 
        var q:TempTile = getTile(x, y, z);
        if (q != null) 
        {
+        
           tempqueue.remove(q);
           dispatchEvent(new TileLoadedEvent(x,y,z,tidx,priority, new Bitmap(q.img)));
           if (q.original)
@@ -283,6 +304,7 @@ class TileLoader extends EventDispatcher
           sortQueue();
           processQueue();
        }
+       
 
     }
 
@@ -304,7 +326,7 @@ class TileLoader extends EventDispatcher
        insertTile({x: x, y: y, z: z, img: img, ttl:DEFAULT_TTL, original:original});
     }
 
-    override public function toString() : String
+     override public function toString() : String
     {
        var used = 0;
        for (l in loaders)
@@ -473,6 +495,7 @@ class TileLoader extends EventDispatcher
 
     function loaderFailed(l:ImageLoader)
     {
+      trace(" failed");
         l.used = false;
         l.ignore = false;
 
