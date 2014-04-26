@@ -1,0 +1,5 @@
+-cp externalCom
+-main TestApi
+-cp haxemaps
+-dce full
+-js Export/html5/bin/testapi.js
