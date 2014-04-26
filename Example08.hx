@@ -28,12 +28,14 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 POSSIBILITY OF SUCH DAMAGE. 
 *******************************************************************************/
 
+import flash.display.Shape;
 import flash.display.Sprite;
 import flash.events.Event;
 import flash.events.KeyboardEvent;
 import map.Canvas;
 import map.LngLat;
 import map.MapService;
+import Api;
 #if flash
 import com.Button;
 
@@ -73,6 +75,7 @@ class Example08 extends Sprite {
     function new()
     {
         super();
+
     this.addEventListener(Event.ADDED_TO_STAGE,function(e)trace("ADDED_TO_STAGE"));
        #if flash toolbar = new ToolBar();#end 
         canvas = new Canvas();
@@ -82,9 +85,9 @@ class Example08 extends Sprite {
         canvas.move(0, 0);
         canvas.setCenter(new LngLat(15.5,49.5));
         layer_osm = new map.TileLayer(new OpenStreetMapService(12), 8);
-      // canvas.addLayer(layer_osm);
-          vectorLayer=new VectorLayer(new OpenStreetMapService(12));
-          canvas.addLayer(vectorLayer);
+        canvas.addLayer(layer_osm);
+        vectorLayer=new VectorLayer(new OpenStreetMapService(12));
+        canvas.addLayer(vectorLayer);
            
         canvas.setZoom(-5);
         stageResized(null);
@@ -240,7 +243,7 @@ class VectorLayer extends Layer
     function redraw()
     {
         ftimer.pause();
-       // trace( "redraw");
+        trace( "redraw");
         
         var zz:Int = this.mapservice.zoom_def + this.zoom;
         var scale:Float = Math.pow(2.0, this.zoom);
@@ -303,7 +306,8 @@ class VectorLayer extends Layer
             continue;
                     }
             
-            
+        
+
             graphics.lineStyle(r/2.0, d.data.color);
             graphics.drawRect((pt.x - cpt.x), (pt.y - cpt.y), r, r);
             
